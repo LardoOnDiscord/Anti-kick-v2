@@ -1,0 +1,29 @@
+// Replace "admin_password" with the actual password of the admin account
+const admin_password = "exploit";
+
+// Get the local player
+const local_player = game.Players:GetLocalPlayer();
+
+// Check if the local player has the "admin" role
+if (local_player.Character.HumanoidRootComponent:GetRole() == Enum.Role.Admin) then
+    -- The local player has the "admin" role, proceed with the exploit
+else
+    -- The local player does not have the "admin" role, stop the exploit
+end
+
+-- Get the game object
+local game = script.Parent
+
+-- Get the kick command
+local kickCommand = game.Parent.KickCommand
+
+-- Listen for the kick command
+kickCommand.ClientScript = script
+
+-- Prevent the player from being kicked
+function PreventKick(ply)
+	ply:Disable()
+end
+
+-- Call the prevent kick function when the kick command is triggered
+kickCommand.PreventKick = PreventKick
